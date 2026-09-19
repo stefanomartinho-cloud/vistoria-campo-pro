@@ -99,3 +99,10 @@ img { max-width: 100%; }
   .mobile-form input, .mobile-form textarea, .mobile-form select { font-size: 16px; }
   .mobile-form button { min-height: 44px; }
 }
+@media (orientation: landscape) and (max-height: 600px) {
+  .mobile-form { padding-top: 16px; padding-bottom: 24px; }
+  .mobile-form > .mb-7 { margin-bottom: 16px; }
+  .mobile-form .card-shadow { padding: 16px; }
+  .mobile-form .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 16px; }
+  .mobile-form .field-label { margin-bottom: 4px; }
+}
