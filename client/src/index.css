@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  --background: #f5f7f8;
+  --foreground: #17212b;
+  --card: #ffffff;
+  --card-foreground: #17212b;
+  --popover: #ffffff;
+  --popover-foreground: #17212b;
+  --primary: #0f766e;
+  --primary-foreground: #ffffff;
+  --secondary: #e8f1ef;
+  --secondary-foreground: #115e59;
+  --muted: #eef2f2;
+  --muted-foreground: #66747d;
+  --accent: #f6b73c;
+  --accent-foreground: #4a3203;
+  --destructive: #c2413a;
+  --border: #dfe7e7;
+  --input: #dfe7e7;
+  --ring: #5bb8ae;
+  --radius: 0.8rem;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--background); }
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+.font-display { font-family: 'Space Grotesk', sans-serif; }
+
+.app-shell { min-height: 100vh; background: #f5f7f8; }
+.sidebar-texture {
+  background-color: #102c2d;
+  background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(155deg, #102c2d 0%, #174646 60%, #0f3432 100%);
+  background-size: 18px 18px, auto;
+}
+.hero-grid { background-image: linear-gradient(rgba(15,118,110,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(15,118,110,.07) 1px, transparent 1px); background-size: 32px 32px; }
+.card-shadow { box-shadow: 0 18px 45px rgba(26, 63, 66, .08); }
+.soft-shadow { box-shadow: 0 5px 18px rgba(26, 63, 66, .06); }
+.field-input { width: 100%; border: 1px solid #dfe7e7; background: white; border-radius: 10px; padding: 11px 13px; color: #17212b; outline: none; transition: border .18s, box-shadow .18s; }
+.field-input:focus { border-color: #5bb8ae; box-shadow: 0 0 0 3px rgba(91,184,174,.18); }
+.field-label { display:block; color:#64747a; font-size: 11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin-bottom:7px; }
+.btn-primary { background:#0f766e; color:white; border-radius:10px; padding:11px 16px; font-weight:700; transition: transform .16s, background .16s, box-shadow .16s; box-shadow: 0 8px 18px rgba(15,118,110,.18); }
+.btn-primary:hover { background:#0b615b; box-shadow:0 10px 24px rgba(15,118,110,.25); }
+.btn-primary:active, .btn-secondary:active { transform: scale(.97); }
+.btn-secondary { background:white; color:#33535a; border:1px solid #dfe7e7; border-radius:10px; padding:10px 14px; font-weight:700; transition: transform .16s, background .16s; }
+.btn-secondary:hover { background:#f6faf9; }
+.progress-line { height: 4px; border-radius: 999px; background: #dbe8e6; overflow: hidden; }
+.progress-line > span { display:block; height:100%; background:#0f766e; border-radius:999px; transition:width .25s ease; }
+.status-ok { color:#157a4a; background:#e6f6ec; }
+.status-attention { color:#a36b08; background:#fff4d8; }
+.status-danger { color:#b73c35; background:#ffebe9; }
+
+@media print {
+  [data-sonner-toaster], .sonner-toaster, [data-radix-toast-viewport], .toast, .toaster { display:none !important; visibility:hidden !important; }
+  body { background:white; }
+  .no-print { display:none !important; }
+  #print-report { display:block !important; overflow:visible !important; }
+  .print-page { box-shadow:none !important; border:0 !important; margin:0 !important; max-width:none !important; overflow:visible !important; }
+  .print-page * { max-width:100%; overflow-wrap:anywhere; word-break:break-word; }
+  .print-page img { max-width:100%; height:auto; }
+  .print-page p, .print-page h1, .print-page h2, .print-page h3, .print-page figure, .print-page .break-inside-avoid { break-inside:avoid; page-break-inside:avoid; }
+  .executive-cover { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  @page { size: A4; margin: 14mm; }
+}
+
+.executive-cover { background: linear-gradient(120deg, #073d3a 0%, #0d625b 42%, #15947f 100%); }
+.executive-kicker { letter-spacing: .22em; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+.executive-label { letter-spacing: .14em; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+
+.break-before-page { break-before: page; page-break-before: always; }

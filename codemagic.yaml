@@ -1,0 +1,27 @@
+workflows:
+  android-apk:
+    name: VistoriaPro Android APK
+    max_build_duration: 120
+    instance_type: mac_mini_m2
+    environment:
+      java: 21
+      node: 22
+    scripts:
+      - name: Enable pnpm
+        script: |
+          corepack enable
+          corepack prepare pnpm@10.4.1 --activate
+      - name: Install dependencies
+        script: pnpm install --frozen-lockfile
+      - name: Build frontend assets
+        script: pnpm exec vite build
+      - name: Sync Capacitor Android project
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
+          pnpm exec cap sync android
+      - name: Build signed debug APK
+        script: |
+          cd android
+          ./gradlew assembleDebug
+    artifacts:
+      - android/app/build/outputs/**/*.apk

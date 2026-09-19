@@ -1,0 +1,10 @@
+from pathlib import Path
+p=Path('/home/ubuntu/vistoria-campo-pro/client/src/pages/Home.tsx')
+s=p.read_text()
+s=s.replace('form.photos.length > 0', '(form.photos || []).length > 0')
+s=s.replace('form.photos.map((photo)', '(form.photos || []).map((photo)')
+s=s.replace('visit.photos.length > 0', '(visit.photos || []).length > 0')
+s=s.replace('visit.photos.map((photo)', '(visit.photos || []).map((photo)')
+s=s.replace('photos: form.photos, participants:', 'photos: form.photos || [], participants:')
+p.write_text(s)
+print('photo compatibility fixed')
