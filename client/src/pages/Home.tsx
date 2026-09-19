@@ -361,8 +361,16 @@ async function exportReportPdf(onReady?: (url: string, file: File, open: () => P
       }
     };
     await Promise.all(Array.from(element.querySelectorAll("img")).map(imageToDataUrl));
+    await Promise.all(Array.from(element.querySelectorAll("img")).map(async (image) => { try { await image.decode(); } catch {} }));
+    if (document.fonts?.ready) await document.fonts.ready;
     const canvas = await html2canvas(element, {
-      scale: Math.min(2, window.devicePixelRatio || 1.5),
+      scale: 1.5,
+      width: 794,
+      height: element.scrollHeight,
+      x: 0,
+      y: 0,
+      scrollX: 0,
+      scrollY: 0,
       useCORS: true,
       backgroundColor: "#ffffff",
       logging: false,
@@ -371,6 +379,20 @@ async function exportReportPdf(onReady?: (url: string, file: File, open: () => P
         const replaceUnsupportedColors = (value: string) => value.replace(/color-mix\([^)]*\)/gi, "rgba(0,0,0,0)").replace(/okl(?:ab|ch)\([^)]*\)/gi, "rgba(0,0,0,0)");
         const sourceNodes = [element, ...Array.from(element.querySelectorAll("*"))];
         const clonedRoot = clonedDocument.getElementById("print-report");
+        if (clonedRoot) {
+          const root = clonedRoot as HTMLElement;
+          root.style.width = "794px";
+          root.style.maxWidth = "794px";
+          root.style.minWidth = "794px";
+          root.style.height = "auto";
+          root.style.maxHeight = "none";
+          root.style.overflow = "visible";
+          root.style.margin = "0";
+          clonedDocument.body.style.width = "794px";
+          clonedDocument.body.style.minWidth = "794px";
+          clonedDocument.body.style.margin = "0";
+          clonedDocument.body.style.overflow = "visible";
+        }
         const clonedNodes = clonedRoot ? [clonedRoot, ...Array.from(clonedRoot.querySelectorAll("*"))] : [];
         sourceNodes.forEach((sourceNode, index) => {
           const targetNode = clonedNodes[index] as HTMLElement | undefined;
@@ -383,6 +405,8 @@ async function exportReportPdf(onReady?: (url: string, file: File, open: () => P
           }
         });
         clonedDocument.querySelectorAll("link[rel=stylesheet]").forEach((node) => node.remove());
+        clonedDocument.querySelectorAll(".no-print").forEach((node) => (node as HTMLElement).style.display = "none");
+        clonedDocument.querySelectorAll("img").forEach((node) => { (node as HTMLElement).style.maxWidth = "100%"; (node as HTMLElement).style.height = (node as HTMLElement).style.height || "auto"; });
       },
     });
     const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4", compress: true });
