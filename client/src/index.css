@@ -79,3 +79,13 @@ button { cursor: pointer; }
 .executive-label { letter-spacing: .14em; font-size: 10px; font-weight: 800; text-transform: uppercase; }
 
 .break-before-page { break-before: page; page-break-before: always; }
+
+/* Mobile field ergonomics: prevent horizontal overflow inside the APK WebView. */
+html, body, #root { width: 100%; max-width: 100%; overflow-x: hidden; }
+.app-shell { width: 100%; max-width: 100%; overflow-x: hidden; }
+.field-input, textarea, select { min-width: 0; max-width: 100%; }
+img { max-width: 100%; }
+@media (max-width: 639px) {
+  .btn-primary, .btn-secondary { min-height: 44px; }
+  .field-input { padding: 12px; }
+}
