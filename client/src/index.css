@@ -85,7 +85,13 @@ html, body, #root { width: 100%; max-width: 100%; overflow-x: hidden; }
 .app-shell { width: 100%; max-width: 100%; overflow-x: hidden; }
 .field-input, textarea, select { min-width: 0; max-width: 100%; }
 img { max-width: 100%; }
+.mobile-form { min-width: 0; overflow-wrap: anywhere; }
+.mobile-form > * { min-width: 0; }
+.mobile-form input, .mobile-form textarea, .mobile-form select { width: 100%; }
 @media (max-width: 639px) {
   .btn-primary, .btn-secondary { min-height: 44px; }
   .field-input { padding: 12px; }
+  .mobile-form .card-shadow { overflow: hidden; }
+  .mobile-form input, .mobile-form textarea, .mobile-form select { font-size: 16px; }
+  .mobile-form button { min-height: 44px; }
 }
