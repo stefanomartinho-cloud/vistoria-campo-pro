@@ -29,16 +29,20 @@ html { background: var(--background); }
 body {
   margin: 0;
   min-width: 320px;
+  min-height: 100%;
   background: var(--background);
   color: var(--foreground);
   font-family: 'DM Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-y: auto;
+  overflow-x: hidden;
+  touch-action: pan-y;
 }
 button, input, textarea, select { font: inherit; }
 button { cursor: pointer; }
 .font-display { font-family: 'Space Grotesk', sans-serif; }
 
-.app-shell { min-height: 100vh; background: #f5f7f8; }
+.app-shell { min-height: 100vh; background: #f5f7f8; overflow-x: hidden; }
 .sidebar-texture {
   background-color: #102c2d;
   background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(155deg, #102c2d 0%, #174646 60%, #0f3432 100%);
